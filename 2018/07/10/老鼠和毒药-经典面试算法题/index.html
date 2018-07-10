@@ -15,19 +15,21 @@
 
 
 
-<meta name="description" content="“shut up and show me the code!”">
+<meta name="description" content="有15个瓶子，其中最多有一瓶有毒，现在有四只老鼠，喝了有毒的水之后，第二天就会死。如何在第二天就可以判断出哪个瓶子有毒?">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift 获取代码所在的文件，行数，函数名">
-<meta property="og:url" content="http://killua167.github.io/2018/07/09/Swift-获取代码所在的文件,行数,函数名/index.html">
+<meta property="og:title" content="4只老鼠和1瓶毒药---经典面试题详解">
+<meta property="og:url" content="http://killua167.github.io/2018/07/10/老鼠和毒药-经典面试算法题/index.html">
 <meta property="og:site_name" content="iOS Coder">
-<meta property="og:description" content="“shut up and show me the code!”">
+<meta property="og:description" content="有15个瓶子，其中最多有一瓶有毒，现在有四只老鼠，喝了有毒的水之后，第二天就会死。如何在第二天就可以判断出哪个瓶子有毒?">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1613719-2491eac79e78d6e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-07-09T08:07:35.704Z">
+<meta property="og:image" content="http://pic.chinadmd.com/upload/1_r5v5xj255oxd8v2kxj31dvbb.jpg">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1613719-8b3e2abed2b20255.png">
+<meta property="og:image" content="http://uploadfiles.nowcoder.net/images/20160109/782072_1452307576579_C1237D70173F2013EC4CF84E8FDD8FFF">
+<meta property="og:updated_time" content="2018-07-10T08:27:39.704Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift 获取代码所在的文件，行数，函数名">
-<meta name="twitter:description" content="“shut up and show me the code!”">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1613719-2491eac79e78d6e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="4只老鼠和1瓶毒药---经典面试题详解">
+<meta name="twitter:description" content="有15个瓶子，其中最多有一瓶有毒，现在有四只老鼠，喝了有毒的水之后，第二天就会死。如何在第二天就可以判断出哪个瓶子有毒?">
+<meta name="twitter:image" content="http://pic.chinadmd.com/upload/1_r5v5xj255oxd8v2kxj31dvbb.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -59,7 +61,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Swift 获取代码所在的文件，行数，函数名 | iOS Coder</title>
+<title>4只老鼠和1瓶毒药---经典面试题详解 | iOS Coder</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -217,11 +219,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-Swift-获取代码所在的文件,行数,函数名" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-老鼠和毒药-经典面试算法题" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/07/09/Swift-获取代码所在的文件,行数,函数名/" class="article-date">
-      <time datetime="2018-07-09T07:03:36.000Z" itemprop="datePublished">2018-07-09</time>
+      <a href="/2018/07/10/老鼠和毒药-经典面试算法题/" class="article-date">
+      <time datetime="2018-07-10T03:10:26.000Z" itemprop="datePublished">2018-07-10</time>
 </a>
 
 
@@ -236,7 +238,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Swift 获取代码所在的文件，行数，函数名
+      4只老鼠和1瓶毒药---经典面试题详解
     </h1>
   
 
@@ -244,6 +246,10 @@
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/面试/">面试</a>
+    </div>
+
 
         
         <div class="clearfix"></div>
@@ -253,14 +259,31 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>“shut up and show me the code!”<br><a id="more"></a></p>
-<h2 id="显示代码所在文件"><a href="#显示代码所在文件" class="headerlink" title="显示代码所在文件"></a>显示代码所在文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">file</span></span><br></pre></td></tr></table></figure>
-<h2 id="显示代码所在的行数"><a href="#显示代码所在的行数" class="headerlink" title="显示代码所在的行数"></a>显示代码所在的行数</h2><figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#line</span></span><br></pre></td></tr></table></figure>
-<h2 id="显示代码所在的函数"><a href="#显示代码所在的函数" class="headerlink" title="显示代码所在的函数"></a>显示代码所在的函数</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="keyword">function</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">buttonAction</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">let</span> fileName = (#file <span class="keyword">as</span> <span class="type">NSString</span>).lastPathComponent</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(fileName)</span>:<span class="subst">\(#line)</span> <span class="subst">\(#function)</span>"</span>)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>打印出</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1613719-2491eac79e78d6e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h2 id="封装："><a href="#封装：" class="headerlink" title="封装："></a>封装：</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//封装的日志输出功能（T表示不指定日志信息参数类型）</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">MyLog</span>&lt;T&gt;<span class="params">(<span class="number">_</span> message:T, file:String = #file, function:String = #function,</span></span></span><br><span class="line"><span class="function"><span class="params">           line:Int = #line)</span></span> &#123;</span><br><span class="line">    #<span class="keyword">if</span> <span class="type">DEBUG</span></span><br><span class="line">        <span class="comment">//获取文件名</span></span><br><span class="line">        <span class="keyword">let</span> fileName = (file <span class="keyword">as</span> <span class="type">NSString</span>).lastPathComponent</span><br><span class="line">        <span class="comment">//打印日志内容</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(fileName)</span>:<span class="subst">\(line)</span> <span class="subst">\(function)</span> | <span class="subst">\(message)</span>"</span>)</span><br><span class="line">    #endif</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>有15个瓶子，其中最多有一瓶有毒，现在有四只老鼠，喝了有毒的水之后，第二天就会死。如何在第二天就可以判断出哪个瓶子有毒?<br><a id="more"></a></p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>给老鼠喂食后，老鼠有生存和死亡两种状态，即0和1，4只老鼠既有16种组合。只要分配恰当，即可完美解决。</p>
+<h2 id="如何分配"><a href="#如何分配" class="headerlink" title="如何分配"></a>如何分配</h2><h3 id="转码"><a href="#转码" class="headerlink" title="转码"></a>转码</h3><p>将15个瓶子编号，然后将十进制的编号转为二进制<br><img src="http://pic.chinadmd.com/upload/1_r5v5xj255oxd8v2kxj31dvbb.jpg" alt="image.jpg"></p>
+<h3 id="按位分配"><a href="#按位分配" class="headerlink" title="按位分配"></a>按位分配</h3><p>将二进制号码第一位为1的瓶子给1号老鼠，第二位为1的瓶子给2号老鼠，依次下去分配给4只老鼠。</p>
+<h4 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h4><p><img src="https://upload-images.jianshu.io/upload_images/1613719-8b3e2abed2b20255.png" alt="image.png"></p>
+<p>即：</p>
+<p>1号老鼠喝 1，3，4，7，9，11，13，15</p>
+<p>2号老鼠喝 2，3，6，7，10，11，14，15</p>
+<p>3号老鼠喝 4，5，6，7，12，13，14，15</p>
+<p>4号老鼠喝 8-15</p>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>根据4只老鼠的状态得出哪个瓶子有毒。</p>
+<p>例如：2号老鼠死了，其他生存，二进制为0010， 转十进制即2，结论为2号瓶子有毒。</p>
+<p>再例如：3号老鼠生存，其余死亡，二进制为1011，转十进制即11，结论为11号瓶子有毒。</p>
+<h2 id="题目变种"><a href="#题目变种" class="headerlink" title="题目变种"></a>题目变种</h2><p>老鼠喝毒药这题目还有一种变种：<br>有16瓶水，其中只有一瓶水有毒，小白鼠喝一滴之后一小时会死。请问最少用（） 只小白鼠，在1小时内一定可以找出至少14瓶无毒的水？<br>A:1,B:3,C:4,D:16<br>答案是B。解法有两种。</p>
+<h3 id="类似上面那题十进制转二进制的解法"><a href="#类似上面那题十进制转二进制的解法" class="headerlink" title="类似上面那题十进制转二进制的解法"></a>类似上面那题十进制转二进制的解法</h3><h3 id="分组法"><a href="#分组法" class="headerlink" title="分组法"></a>分组法</h3><p><img src="http://uploadfiles.nowcoder.net/images/20160109/782072_1452307576579_C1237D70173F2013EC4CF84E8FDD8FFF" alt="image.png"></p>
+<p>在<a href="https://www.nowcoder.com/questionTerminal/a09c0eecbf684b0cba2ad0be32b7988e" target="_blank" rel="noopener">牛客网</a>看到的。。。<br>如图所示，将16瓶水分别标号为1~16，2瓶为一组，分为8组,为：A1是第1、2瓶水，以此类推……A8为第15、16瓶水</p>
+<p>图中三个圆圈分别为3个小白鼠</p>
+<p>小白鼠1喝   A1、A4、A5、A7<br>小白鼠2喝   A2、A4、A6、A7<br>小白鼠3喝   A3、A5、A6、A7</p>
+<p>若仅小白鼠1死，则有毒水在A1组<br>若仅小白鼠2死，则有毒水在A2组<br>若仅小白鼠3死，则有毒水在A3组<br>若仅小白鼠1、2死，则有毒水在A4组<br>若仅小白鼠1、3死，则有毒水在A5组<br>若仅小白鼠2、3死，则有毒水在A6组<br>若小白鼠都死，则有毒水在A7组<br>若小白鼠都不死，则有毒水在A8组</p>
+<p>综上所述，只需3只小白鼠即可在1小时内一定可以找出至少14瓶无毒的水</p>
+<h2 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h2><p>在查找资料的时候，看到有网友审题不清，没看清是限时的，写出了以下答案：</p>
+<blockquote>
+<p>我觉得可以这么做呀，让一只小白鼠每隔一分钟喝一瓶水中的一滴，然后看小白鼠是在一个小时后第几分钟死掉的，这样只需要一只不就可以了？</p>
+</blockquote>
+<p>是不是觉得思路惊奇，但又观点很赞呢，哈哈!</p>
 
       
     </div>
@@ -269,13 +292,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/07/09/Swift-获取代码所在的文件,行数,函数名/">Swift 获取代码所在的文件，行数，函数名</a></p>
+        <p><span>本文标题:</span><a href="/2018/07/10/老鼠和毒药-经典面试算法题/">4只老鼠和1瓶毒药---经典面试题详解</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">killua167</a></p>
-        <p><span>发布时间:</span>2018-07-09, 15:03:36</p>
-        <p><span>最后更新:</span>2018-07-09, 16:07:35</p>
+        <p><span>发布时间:</span>2018-07-10, 11:10:26</p>
+        <p><span>最后更新:</span>2018-07-10, 16:27:39</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/07/09/Swift-获取代码所在的文件,行数,函数名/" title="Swift 获取代码所在的文件，行数，函数名">http://killua167.github.io/2018/07/09/Swift-获取代码所在的文件,行数,函数名/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://killua167.github.io/2018/07/09/Swift-获取代码所在的文件,行数,函数名/　　作者: killua167" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/07/10/老鼠和毒药-经典面试算法题/" title="4只老鼠和1瓶毒药---经典面试题详解">http://killua167.github.io/2018/07/10/老鼠和毒药-经典面试算法题/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://killua167.github.io/2018/07/10/老鼠和毒药-经典面试算法题/　　作者: killua167" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -287,12 +310,12 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
+        
+            <div id="article-nav-older" class="article-nav-title">
                 <a href="/2018/07/09/自定义UIPanGestureRecognizer只能垂直或水平滑动/">
                     自定义UIPanGestureRecognizer只能垂直或水平滑动
                 </a>
             </div>
-        
         
     </nav>
 
@@ -302,7 +325,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#显示代码所在文件"><span class="toc-number">1.</span> <span class="toc-text">显示代码所在文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显示代码所在的行数"><span class="toc-number">2.</span> <span class="toc-text">显示代码所在的行数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显示代码所在的函数"><span class="toc-number">3.</span> <span class="toc-text">显示代码所在的函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#例子："><span class="toc-number">4.</span> <span class="toc-text">例子：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#封装："><span class="toc-number">5.</span> <span class="toc-text">封装：</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-number">1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何分配"><span class="toc-number">2.</span> <span class="toc-text">如何分配</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#转码"><span class="toc-number">2.1.</span> <span class="toc-text">转码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#按位分配"><span class="toc-number">2.2.</span> <span class="toc-text">按位分配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#图解"><span class="toc-number">2.2.1.</span> <span class="toc-text">图解</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结果"><span class="toc-number">3.</span> <span class="toc-text">结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目变种"><span class="toc-number">4.</span> <span class="toc-text">题目变种</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类似上面那题十进制转二进制的解法"><span class="toc-number">4.1.</span> <span class="toc-text">类似上面那题十进制转二进制的解法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分组法"><span class="toc-number">4.2.</span> <span class="toc-text">分组法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题外话"><span class="toc-number">5.</span> <span class="toc-text">题外话</span></a></li></ol>
         
     </div>
     <style>
@@ -338,7 +361,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Swift 获取代码所在的文件，行数，函数名　| iOS Coder　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"4只老鼠和1瓶毒药---经典面试题详解　| iOS Coder　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -358,15 +381,15 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/07/09/自定义UIPanGestureRecognizer只能垂直或水平滑动/" title="上一篇: 自定义UIPanGestureRecognizer只能垂直或水平滑动">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2018/07/09/自定义UIPanGestureRecognizer只能垂直或水平滑动/" title="下一篇: 自定义UIPanGestureRecognizer只能垂直或水平滑动">
+                <i class="fa fa-angle-right"></i>
+            </a>
         
     </div>
 
