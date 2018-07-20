@@ -43,7 +43,7 @@
     
     <title>
         
-            過往 | 
+            YYCache 源码简析 | 
         
         iOS Coder
     </title>
@@ -53,7 +53,7 @@
     <link rel="icon" href="/img/iOS.png">
 
     <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" itemprop="description" content="">
+    <meta name="description" itemprop="description" content="YYCache是大神ibireme开源的一个高性能 iOS 缓存框架，是属于鼎鼎大名的YYKit组件之一。代码风格简洁清晰，作为本人开始通读优秀开源代码颇为合适。">
     <meta name="keywords" content="">
     <meta name="theme-color" content="#0097A7">
 
@@ -81,6 +81,9 @@
         <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?MKetZV3cUTfDxvMffaOezg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/tomorrow-night.min.css?QlnGZk/a4+d8XbwtXBDPiA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
             
         
 
@@ -217,7 +220,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="iOS Coder">
-    <meta name="msapplication-starturl" content="http://killua167.github.io/archives/">
+    <meta name="msapplication-starturl" content="http://killua167.github.io/2018/07/20/YYCache-源码简析/">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="iOS Coder">
@@ -232,13 +235,16 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://killua167.github.io/archives/">
+    <meta property="og:url" content="http://killua167.github.io/2018/07/20/YYCache-源码简析/">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="過往 | iOS Coder">
+    <meta property="og:title" content="YYCache 源码简析 | iOS Coder">
     <meta property="og:image" content="/img/iOS.png">
-    <meta property="og:description" content="">
+    <meta property="og:description" content="YYCache是大神ibireme开源的一个高性能 iOS 缓存框架，是属于鼎鼎大名的YYKit组件之一。代码风格简洁清晰，作为本人开始通读优秀开源代码颇为合适。">
     
 
+    
+        <meta property="article:published_time" content="Fri Jul 20 2018 11:20:30 GMT+0800">
+        <meta property="article:modified_time" content="Fri Jul 20 2018 16:32:45 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -246,13 +252,43 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://killua167.github.io/archives/index.html" />
+        <link rel="canonical" href="http://killua167.github.io/2018/07/20/YYCache-源码简析/index.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://killua167.github.io/2018/07/20/YYCache-源码简析/index.html",
+    "headline": "YYCache 源码简析",
+    "datePublished": "Fri Jul 20 2018 11:20:30 GMT+0800",
+    "dateModified": "Fri Jul 20 2018 16:32:45 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "killua167",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "小处成就大事"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "iOS Coder",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/iOS.png"
+        }
+    },
+    "keywords": "",
+    "description": "YYCache是大神ibireme开源的一个高性能 iOS 缓存框架，是属于鼎鼎大名的YYKit组件之一。代码风格简洁清晰，作为本人开始通读优秀开源代码颇为合适。",
+}
+</script>
 
 
     
@@ -286,338 +322,398 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目架构和组件成员划分"><span class="post-toc-text">项目架构和组件成员划分</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#架构图"><span class="post-toc-text">架构图</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#组件成员职能"><span class="post-toc-text">组件成员职能</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码解析"><span class="post-toc-text">代码解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#YYCache"><span class="post-toc-text">YYCache</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#YYMemoryCache"><span class="post-toc-text">YYMemoryCache</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#YYLinkedMapNode"><span class="post-toc-text">_YYLinkedMapNode</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#YYLinkedMap"><span class="post-toc-text">_YYLinkedMap</span></a></li></ol></li></ol></li></ol>
+    </ul>
     
 
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/07/20/YYCache-源码简析/">YYCache 源码简析</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            YYCache是大神ibireme开源的一个高性能 iOS 缓存框架，是属于鼎鼎大名的YYKit组件之一。代码风格简洁清晰，作为本人开始通读优秀开源代码颇为合适。
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/07/20/YYCache-源码简析/" target="_self">繼續閱讀</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="killua167's avatar">
-            </div>
-            <div>
-                <strong>killua167</strong>
-                <span>7月 20, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/07/10/老鼠和毒药-经典面试算法题/">4只老鼠和1瓶毒药---经典面试题详解</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            有15个瓶子，其中最多有一瓶有毒，现在有四只老鼠，喝了有毒的水之后，第二天就会死。如何在第二天就可以判断出哪个瓶子有毒?
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/07/10/老鼠和毒药-经典面试算法题/" target="_self">繼續閱讀</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="killua167's avatar">
-            </div>
-            <div>
-                <strong>killua167</strong>
-                <span>7月 10, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-              <!-- Category -->
-              <span class="post_entry-category">
-                  <a class="post_category-link" href="/categories/面试/">面试</a>
-              </span>
-            
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/07/21/Swift-获取代码所在的文件,行数,函数名/">Swift 获取代码所在的文件，行数，函数名</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            “shut up and show me the code!”
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/07/21/Swift-获取代码所在的文件,行数,函数名/" target="_self">繼續閱讀</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="killua167's avatar">
-            </div>
-            <div>
-                <strong>killua167</strong>
-                <span>7月 21, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-              <!-- Category -->
-              <span class="post_entry-category">
-                  <a class="post_category-link" href="/categories/Swift/">Swift</a>
-              </span>
-            
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/05/22/ReactiveSwift-MVVM-登录demo详解/">ReactiveSwift + MVVM 登录demo详解</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-最近在研究Swift下的MVVM模式，就尝试用ReactiveCocoa来便捷绑定VM
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/05/22/ReactiveSwift-MVVM-登录demo详解/" target="_self">繼續閱讀</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="killua167's avatar">
-            </div>
-            <div>
-                <strong>killua167</strong>
-                <span>5月 22, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-              <!-- Category -->
-              <span class="post_entry-category">
-                  <a class="post_category-link" href="/categories/Swift/">Swift</a>
-              </span>
-            
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2016/12/29/自定义UIPanGestureRecognizer只能垂直或水平滑动/">自定义UIPanGestureRecognizer只能垂直或水平滑动</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            如何自定义UIPanGestureRecognizer，让它只能响应垂直或水平滑动。
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2016/12/29/自定义UIPanGestureRecognizer只能垂直或水平滑动/" target="_self">繼續閱讀</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="killua167's avatar">
-            </div>
-            <div>
-                <strong>killua167</strong>
-                <span>12月 29, 2016</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-              <!-- Category -->
-              <span class="post_entry-category">
-                  <a class="post_category-link" href="/categories/iOS/">iOS</a>
-              </span>
-            
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-
-    
-
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
     $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
-    }
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                YYCache 源码简析
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>killua167</strong>
+        <span>7月 20, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=YYCache 源码简析&url=http://killua167.github.io/2018/07/20/YYCache-源码简析/index.html&via=killua167" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://killua167.github.io/2018/07/20/YYCache-源码简析/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
     
 </div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>YYCache是大神ibireme开源的一个高性能 iOS 缓存框架，是属于鼎鼎大名的YYKit组件之一。代码风格简洁清晰，作为本人开始通读优秀开源代码颇为合适。<br><a id="more"></a></p>
+<h2 id="项目架构和组件成员划分"><a href="#项目架构和组件成员划分" class="headerlink" title="项目架构和组件成员划分"></a>项目架构和组件成员划分</h2><h3 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h3><p>借用JK大神的图：<br><img src="https://user-gold-cdn.xitu.io/2018/1/22/1611c66be5bd7907?imageslim" alt="架构图"><br><img src="https://upload-images.jianshu.io/upload_images/1613719-6bf9ef7498e44915.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="项目代码"></p>
+<h3 id="组件成员职能"><a href="#组件成员职能" class="headerlink" title="组件成员职能"></a>组件成员职能</h3><p>YYCache: 整个框架的最外层接口，调用了YYMemoryCache和YYDiskCache的方法。<br>YYMemoryCache: 负责容量较小，速度较快的内存缓存组件，线程安全。<br>_YYLinkedMap: 实现内存缓存的双链表类。使用者通常不会直接使用到。<br>_YYLinkedMapNode: 双链表节点类。使用者通常不会直接使用到。<br>YYDiskCache: 负责容量较大的磁盘缓存组件，线程安全。类似于NSURLCache的磁盘缓存。<br>YYKVStorage: 基于sqlite和文件系统实现储存的底层实现类。使用者通常不会直接使用到。<br>YYKVStorageItem: 服务于YYKVStorage，用来储存键值对和元数据。使用者通常不会直接使用到。</p>
+<h2 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h2><h3 id="YYCache"><a href="#YYCache" class="headerlink" title="YYCache"></a>YYCache</h3><p>关键实现代码：</p>
+<pre><code>//根据参数key返回是否有缓存
+- (BOOL)containsObjectForKey:(NSString *)key {
+    return [_memoryCache containsObjectForKey:key] || [_diskCache containsObjectForKey:key];
+}
+
+//根据参数key返回缓存的value
+- (id&lt;NSCoding&gt;)objectForKey:(NSString *)key {
+    id&lt;NSCoding&gt; object = [_memoryCache objectForKey:key];
+    if (!object) {
+        object = [_diskCache objectForKey:key];
+        if (object) {
+            [_memoryCache setObject:object forKey:key];
+        }
+    }
+    return object;
+}
+
+//设置指定key以缓存value
+- (void)setObject:(id&lt;NSCoding&gt;)object forKey:(NSString *)key {
+    //先存入内存缓存，在写入磁盘缓存
+    [_memoryCache setObject:object forKey:key];
+    [_diskCache setObject:object forKey:key];
+}
+
+//根据key清除指定缓存
+- (void)removeObjectForKey:(NSString *)key {
+    //先清除内存缓存，在清除磁盘缓存
+    [_memoryCache removeObjectForKey:key];
+    [_diskCache removeObjectForKey:key];
+}
+
+//清空缓存
+- (void)removeAllObjects {
+    [_memoryCache removeAllObjects];
+    [_diskCache removeAllObjects];
+}
+</code></pre><p>以上源码可以看出，YYCache所有缓存写入、查询和清除机制都是先内存缓存，在磁盘缓存，以加快读取速度。</p>
+<h3 id="YYMemoryCache"><a href="#YYMemoryCache" class="headerlink" title="YYMemoryCache"></a>YYMemoryCache</h3><p>API和功能都和NSCache相似，但YYMemoryCache和NSCache有几个不同的地方：</p>
+<ol>
+<li>利用LRU(least-recently-used)机制清除缓存,而NSCache的机制是不确定性的；</li>
+<li>YYMemoryCache可以按照cost,count和age三个维度清除缓存，而后者的清除限制不是很精确；</li>
+<li>可以配置当收到内存警告或者App进入后台的时候，可以自动清除缓存。</li>
+</ol>
+<p>LRU缓存机制是指，每当有新的缓存加入，就会把它放在一个表的表头，旧的缓存旧会慢慢靠后。经常访问的缓存会慢慢累积在前面，而不经常访问的会沉淀到后面。当清除缓存时，优先清除靠后的缓存，这样就可以确保缓存是经常访问的，从而提升读取速度。</p>
+<p>YYMemoryCache种使用了双链表实现LRU算法，_YYLinkedMap就是这个双向链表类，_YYLinkedMapNode是链表内的节点类。</p>
+<h4 id="YYLinkedMapNode"><a href="#YYLinkedMapNode" class="headerlink" title="_YYLinkedMapNode"></a>_YYLinkedMapNode</h4><p>_YYLinkedMapNode可以被看做是对某个缓存的封装：它包含了该节点上一个和下一个节点的指针，以及缓存的key和对应的值（对象），还有该缓存的开销和访问时间。</p>
+<pre><code>@interface _YYLinkedMapNode : NSObject {
+    @package
+    __unsafe_unretained _YYLinkedMapNode *_prev; // retained by dic
+    __unsafe_unretained _YYLinkedMapNode *_next; // retained by dic
+    id _key; //缓存key
+    id _value; //key对应的value
+    NSUInteger _cost; //缓存开销
+    NSTimeInterval _time; //访问时间
+}
+@end
+
+@implementation _YYLinkedMapNode
+@end
+</code></pre><h4 id="YYLinkedMap"><a href="#YYLinkedMap" class="headerlink" title="_YYLinkedMap"></a>_YYLinkedMap</h4><pre><code>@interface _YYLinkedMap : NSObject {
+    @package
+    CFMutableDictionaryRef _dic; // do not set object directly
+    NSUInteger _totalCost;
+    NSUInteger _totalCount;
+    _YYLinkedMapNode *_head; // MRU, do not change it directly
+    _YYLinkedMapNode *_tail; // LRU, do not change it directly
+    BOOL _releaseOnMainThread;
+    BOOL _releaseAsynchronously;
+}
+
+@end
+</code></pre><p>二者关系图：<br><img src="https://user-gold-cdn.xitu.io/2018/1/22/1611c66be5e027e5?imageslim" alt=""></p>
+<p>_YYLinkedMap几个方法的实现<br>在链表头部插入某节点</p>
+<pre><code>- (void)insertNodeAtHead:(_YYLinkedMapNode *)node {
+    //设置该node的值
+    CFDictionarySetValue(_dic, (__bridge const void *)(node-&gt;_key), (__bridge const void *)(node));
+    _totalCost += node-&gt;_cost; //增加总开销
+    _totalCount++; //总数加1
+    if (_head) { //如果存在头部节点
+        node-&gt;_next = _head; //将这个节点的_next指向头部节点
+        _head-&gt;_prev = node; //头部节点的_prev指向这个节点
+        _head = node; //头部节点指向这个节点
+    } else { //链表为空
+        _head = _tail = node;
+    }
+}
+</code></pre><p>将链表内部的某个节点移到链表头部</p>
+<pre><code>- (void)bringNodeToHead:(_YYLinkedMapNode *)node {
+    if (_head == node) return; //头部节点就是这个节点，返回
+
+    //把这个节点拿出来，前后的节点对接好
+    if (_tail == node) { //如果是尾部节点
+        _tail = node-&gt;_prev;  //尾部节点指向节点的上一个
+        _tail-&gt;_next = nil;  //然后_next置空
+    } else {
+        node-&gt;_next-&gt;_prev = node-&gt;_prev; //前面的接到后面
+        node-&gt;_prev-&gt;_next = node-&gt;_next; //后面的接到前面
+    }
+    //将这个节点放在头部
+    node-&gt;_next = _head;
+    node-&gt;_prev = nil;
+    _head-&gt;_prev = node;
+    _head = node;
+}
+</code></pre><p>移除链表中的某个节点：</p>
+<pre><code>- (void)removeNode:(_YYLinkedMapNode *)node {
+    //除去该node的键对应的值
+    CFDictionaryRemoveValue(_dic, (__bridge const void *)(node-&gt;_key));
+    _totalCost -= node-&gt;_cost; //减少开销
+    _totalCount--; //总数减一
+    //1. 将该node的头指针指向的节点赋给其尾指针指向的节点的头指针
+    if (node-&gt;_next) node-&gt;_next-&gt;_prev = node-&gt;_prev;
+    //2. 将该node的尾指针指向的节点赋给其头指针指向的节点的尾指针
+    if (node-&gt;_prev) node-&gt;_prev-&gt;_next = node-&gt;_next;
+    //3. 如果该node就是链表的头结点，则将该node的尾部指针指向的节点赋给链表的头节点（第二变成了第一）
+    if (_head == node) _head = node-&gt;_next;
+    //4. 如果该node就是链表的尾节点，则将该node的头部指针指向的节点赋给链表的尾节点（倒数第二变成了倒数第一）
+    if (_tail == node) _tail = node-&gt;_prev;
+}
+</code></pre><p>了解完底层的算法后，在了解一下YYMemoryCache的几个主要API实现</p>
+<p>写入某个缓存对象，并存入缓存开销：</p>
+<pre><code>- (void)setObject:(id)object forKey:(id)key withCost:(NSUInteger)cost {
+    if (!key) return;
+    if (!object) {
+        [self removeObjectForKey:key];
+        return;
+    }
+    pthread_mutex_lock(&amp;_lock);
+    _YYLinkedMapNode *node = CFDictionaryGetValue(_lru-&gt;_dic, (__bridge const void *)(key));
+    NSTimeInterval now = CACurrentMediaTime();
+    if (node) { //如果已经存，则更新node的value,cost,time,并放到头部
+        _lru-&gt;_totalCost -= node-&gt;_cost;
+        _lru-&gt;_totalCost += cost;
+        node-&gt;_cost = cost;
+        node-&gt;_time = now;
+        node-&gt;_value = object;
+        [_lru bringNodeToHead:node];
+    } else { //如果不存在，则新建一个node，设置cost,time,key,value，并插入到头部
+        node = [_YYLinkedMapNode new];
+        node-&gt;_cost = cost;
+        node-&gt;_time = now;
+        node-&gt;_key = key;
+        node-&gt;_value = object;
+        [_lru insertNodeAtHead:node];
+    }
+    if (_lru-&gt;_totalCost &gt; _costLimit) {
+        dispatch_async(_queue, ^{
+            [self trimToCost:_costLimit];
+        });
+    }
+    //如果超过totalCount,则从尾部删除缓存
+    if (_lru-&gt;_totalCount &gt; _countLimit) {
+        _YYLinkedMapNode *node = [_lru removeTailNode];
+        if (_lru-&gt;_releaseAsynchronously) {
+            dispatch_queue_t queue = _lru-&gt;_releaseOnMainThread ? dispatch_get_main_queue() : YYMemoryCacheGetReleaseQueue();
+            dispatch_async(queue, ^{
+                [node class]; //hold and release in queue
+            });
+        } else if (_lru-&gt;_releaseOnMainThread &amp;&amp; !pthread_main_np()) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [node class]; //hold and release in queue
+            });
+        }
+    }
+    pthread_mutex_unlock(&amp;_lock);
+}
+</code></pre><p>缓存清除方法</p>
+<pre><code>// =========== 缓存清理接口 =========== 
+//清理缓存到指定个数
+- (void)trimToCount:(NSUInteger)count;
+
+//清理缓存到指定开销
+- (void)trimToCost:(NSUInteger)cost;
+
+//清理缓存时间小于指定时间的缓存
+- (void)trimToAge:(NSTimeInterval)age;
+</code></pre><p>自动清除缓存方法</p>
+<pre><code>//递归清理，相隔时间为_autoTrimInterval 默认5.0，在初始化之后立即执行
+- (void)_trimRecursively {
+    __weak typeof(self) _self = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(_autoTrimInterval * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        __strong typeof(_self) self = _self;
+        if (!self) return;
+        //在后台进行清理操作
+        [self _trimInBackground];
+        //调用自己，递归操作
+        [self _trimRecursively];
+    });
+}
+//清理所有不符合限制的缓存，顺序为：cost，count，age
+- (void)_trimInBackground {
+    dispatch_async(_queue, ^{
+        [self _trimToCost:self-&gt;_costLimit];
+        [self _trimToCount:self-&gt;_countLimit];
+        [self _trimToAge:self-&gt;_ageLimit];
+    });
+}
+</code></pre>
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/07/10/老鼠和毒药-经典面试算法题/" id="post_nav-older" class="next-content">
+            舊篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
@@ -937,6 +1033,10 @@ It will not impact the appearance and can give developers a lot of support :)
 <!-- Import prettify js  -->
 
     
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
 
 
 
@@ -949,6 +1049,11 @@ It will not impact the appearance and can give developers a lot of support :)
     });
 
     
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
         
     
     
