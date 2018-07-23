@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Fri Jul 20 2018 11:20:30 GMT+0800">
-        <meta property="article:modified_time" content="Fri Jul 20 2018 16:32:45 GMT+0800">
+        <meta property="article:modified_time" content="Mon Jul 23 2018 16:36:06 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "http://killua167.github.io/2018/07/20/YYCache-源码简析/index.html",
     "headline": "YYCache 源码简析",
     "datePublished": "Fri Jul 20 2018 11:20:30 GMT+0800",
-    "dateModified": "Fri Jul 20 2018 16:32:45 GMT+0800",
+    "dateModified": "Mon Jul 23 2018 16:36:06 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "killua167",
@@ -351,7 +351,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目架构和组件成员划分"><span class="post-toc-text">项目架构和组件成员划分</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#架构图"><span class="post-toc-text">架构图</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#组件成员职能"><span class="post-toc-text">组件成员职能</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码解析"><span class="post-toc-text">代码解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#YYCache"><span class="post-toc-text">YYCache</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#YYMemoryCache"><span class="post-toc-text">YYMemoryCache</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#YYLinkedMapNode"><span class="post-toc-text">_YYLinkedMapNode</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#YYLinkedMap"><span class="post-toc-text">_YYLinkedMap</span></a></li></ol></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目架构和组件成员划分"><span class="post-toc-text">项目架构和组件成员划分</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#架构图"><span class="post-toc-text">架构图</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#组件成员职能"><span class="post-toc-text">组件成员职能</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码解析"><span class="post-toc-text">代码解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#YYCache"><span class="post-toc-text">YYCache</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#YYMemoryCache"><span class="post-toc-text">YYMemoryCache</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#YYLinkedMapNode"><span class="post-toc-text">_YYLinkedMapNode</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#YYLinkedMap"><span class="post-toc-text">_YYLinkedMap</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#YYDiskCache"><span class="post-toc-text">YYDiskCache</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#YYKVStorage"><span class="post-toc-text">YYKVStorage</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于线程安全的方案"><span class="post-toc-text">关于线程安全的方案</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#pthread-mutex线程锁（互斥锁）："><span class="post-toc-text">pthread_mutex线程锁（互斥锁）：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#dispatch-semaphore信号量代替锁"><span class="post-toc-text">dispatch_semaphore信号量代替锁</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#涉及到的一些技巧"><span class="post-toc-text">涉及到的一些技巧</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#异步释放对象的技巧"><span class="post-toc-text">异步释放对象的技巧</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结YYCache的技术点"><span class="post-toc-text">总结YYCache的技术点</span></a></li></ol>
     </ul>
     
 
@@ -675,7 +675,272 @@
         [self _trimToAge:self-&gt;_ageLimit];
     });
 }
-</code></pre>
+</code></pre><h3 id="YYDiskCache"><a href="#YYDiskCache" class="headerlink" title="YYDiskCache"></a>YYDiskCache</h3><p>YYDiskCache 是一个线程安全，通过用sqlite和文件系统备份数据的缓存模块。有一下功能特点：</p>
+<ol>
+<li>使用LRU算法清除缓存；</li>
+<li>可以通过开销，数量和时间三个维度控制缓存；</li>
+<li>可以配置当没有磁盘空间时自动清理缓存；</li>
+<li>能自动决定使用哪种方法缓存每一个数据以达到更高的效率。</li>
+</ol>
+<p>首先看缓存的方式有三种：</p>
+<pre><code>typedef NS_ENUM(NSUInteger, YYKVStorageType) {
+
+    /// 以文件的形式储存数据
+    YYKVStorageTypeFile = 0,
+
+    /// 以sqlite元数据的形式储存
+    YYKVStorageTypeSQLite = 1,
+
+    /// 混合上面两种
+    YYKVStorageTypeMixed = 2,
+};
+</code></pre><p>作者建议如果储存大量的小数据（例如通讯录），用YYKVStorageTypeSQLite的方式会有更好的表现。如果储存大文件（例如图片缓存），用YYKVStorageTypeFile会更好。</p>
+<p>初始化方法：</p>
+<pre><code>- (instancetype)initWithPath:(NSString *)path {
+    return [self initWithPath:path inlineThreshold:1024 * 20]; // 20KB
+}
+
+- (instancetype)initWithPath:(NSString *)path
+             inlineThreshold:(NSUInteger)threshold {
+    self = [super init];
+    if (!self) return nil;
+
+    YYDiskCache *globalCache = _YYDiskCacheGetGlobal(path);
+    if (globalCache) return globalCache;
+
+    YYKVStorageType type;
+    if (threshold == 0) {
+        type = YYKVStorageTypeFile;
+    } else if (threshold == NSUIntegerMax) {
+        type = YYKVStorageTypeSQLite;
+    } else {
+        type = YYKVStorageTypeMixed;
+    }
+
+    YYKVStorage *kv = [[YYKVStorage alloc] initWithPath:path type:type];
+    if (!kv) return nil;
+
+    _kv = kv;
+    _path = path;
+    _lock = dispatch_semaphore_create(1);
+    _queue = dispatch_queue_create(&quot;com.ibireme.cache.disk&quot;, DISPATCH_QUEUE_CONCURRENT);
+    _inlineThreshold = threshold;
+    _countLimit = NSUIntegerMax;
+    _costLimit = NSUIntegerMax;
+    _ageLimit = DBL_MAX;
+    _freeDiskSpaceLimit = 0;
+    _autoTrimInterval = 60;
+
+    [self _trimRecursively];
+    _YYDiskCacheSetGlobal(self);
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_appWillBeTerminated) name:UIApplicationWillTerminateNotification object:nil];
+    return self;
+}
+</code></pre><p>参数inlineThreshold的默认值是20480(20K）,即使用文件+数据库的形式储存。至于为什么是20k，是因为单条数据小于20k的时候，SQLite读取性能比文件高，超过20k，则文件速度更快。以下是作者原话：</p>
+<blockquote>
+<p>iPhone 6 64G 下，SQLite 写入性能比直接写文件要高，但读取性能取决于数据大小：当单条数据小于 20K 时，数据越小 SQLite 读取性能越高；单条数据大于 20K 时，直接写为文件速度会更快一些。这和 SQLite 官网的描述基本一致。另外，直接从官网下载最新的 SQLite 源码编译，会比 iOS 系统自带的 sqlite3.dylib 性能要高很多。基于 SQLite 的这种表现，磁盘缓存最好是把 SQLite 和文件存储结合起来：key-value 元数据保存在 SQLite 中，而 value 数据则根据大小不同选择 SQLite 或文件存储。</p>
+</blockquote>
+<p>另外作者提到NSURLCache 选定的数据大小的阈值是 16K。</p>
+<p>在来看setObject方法</p>
+<pre><code>- (void)setObject:(id&lt;NSCoding&gt;)object forKey:(NSString *)key {
+    if (!key) return;
+    if (!object) {
+        [self removeObjectForKey:key];
+        return;
+    }
+
+    NSData *extendedData = [YYDiskCache getExtendedDataFromObject:object];
+    NSData *value = nil;
+    if (_customArchiveBlock) {
+        value = _customArchiveBlock(object);
+    } else {
+        @try {
+            value = [NSKeyedArchiver archivedDataWithRootObject:object];
+        }
+        @catch (NSException *exception) {
+            // nothing to do...
+        }
+    }
+    if (!value) return;
+    NSString *filename = nil;
+    if (_kv.type != YYKVStorageTypeSQLite) {
+        if (value.length &gt; _inlineThreshold) {
+            filename = [self _filenameForKey:key];
+        }
+    }
+
+    Lock();
+    [_kv saveItemWithKey:key value:value filename:filename extendedData:extendedData];
+    Unlock();
+}
+</code></pre><p>就是根据数据的大小判读储存的方式，最后实现YYKVStorage的方法（saveItemWithKey:value:filename:extendedData:）。</p>
+<h3 id="YYKVStorage"><a href="#YYKVStorage" class="headerlink" title="YYKVStorage"></a>YYKVStorage</h3><p>YYKVStorage实例负责保存和管理所有磁盘缓存。和YYMemoryCache里面的_YYLinkedMap将缓存封装成节点类_YYLinkedMapNode类似，YYKVStorage也将某个单独的磁盘缓存封装成了一个类，这个类就是YYKVStorageItem，它保存了某个缓存所对应的一些信息(key, value, 文件名，大小等等)：</p>
+<pre><code>@interface YYKVStorageItem : NSObject
+@property (nonatomic, strong) NSString *key;                ///&lt; key
+@property (nonatomic, strong) NSData *value;                ///&lt; value
+@property (nullable, nonatomic, strong) NSString *filename; ///&lt; filename (nil if inline)
+@property (nonatomic) int size;                             ///&lt; value&#39;s size in bytes
+@property (nonatomic) int modTime;                          ///&lt; modification unix timestamp
+@property (nonatomic) int accessTime;                       ///&lt; last access unix timestamp
+@property (nullable, nonatomic, strong) NSData *extendedData; ///&lt; extended data (nil if no extended data)
+@end
+</code></pre><p>既然在这里将缓存封装成了YYKVStorageItem实例，那么作为缓存的管理者，YYKVStorage就必然有操作YYKVStorageItem的接口了,关键是写入缓存的接口：</p>
+<pre><code>- (BOOL)saveItem:(YYKVStorageItem *)item {
+    return [self saveItemWithKey:item.key value:item.value filename:item.filename extendedData:item.extendedData];
+}
+
+- (BOOL)saveItemWithKey:(NSString *)key value:(NSData *)value {
+    return [self saveItemWithKey:key value:value filename:nil extendedData:nil];
+}
+
+- (BOOL)saveItemWithKey:(NSString *)key value:(NSData *)value filename:(NSString *)filename extendedData:(NSData *)extendedData {
+    if (key.length == 0 || value.length == 0) return NO;
+    if (_type == YYKVStorageTypeFile &amp;&amp; filename.length == 0) {
+        return NO;
+    }
+
+    if (filename.length) {
+        if (![self _fileWriteWithName:filename data:value]) {
+            return NO;
+        }
+        if (![self _dbSaveWithKey:key value:value fileName:filename extendedData:extendedData]) {
+            [self _fileDeleteWithName:filename];
+            return NO;
+        }
+        return YES;
+    } else {
+        if (_type != YYKVStorageTypeSQLite) {
+            NSString *filename = [self _dbGetFilenameWithKey:key];
+            if (filename) {
+                [self _fileDeleteWithName:filename];
+            }
+        }
+        return [self _dbSaveWithKey:key value:value fileName:nil extendedData:extendedData];
+    }
+}
+</code></pre><ol>
+<li>判断key和value是否符合要求；</li>
+<li>判断是文件储存的时候文件名是否为空，否则返回No；</li>
+<li>根据文件名字符串是否为空。</li>
+<li>不是空的话，将数据写入文件，再将除value以外的所有信息(key,filename,value的长度，访问和修改时间和extededData)存在SQLite中。<br>5.如果为空的话，首先判断是不是SQLite形式，是的话，将所有信息存到SQLite，否则删除写入的缓存文件。</li>
+</ol>
+<p>关于第三点操作，源码如下：</p>
+<pre><code>- (BOOL)_dbSaveWithKey:(NSString *)key value:(NSData *)value fileName:(NSString *)fileName extendedData:(NSData *)extendedData {
+    NSString *sql = @&quot;insert or replace into manifest (key, filename, size, inline_data, modification_time, last_access_time, extended_data) values (?1, ?2, ?3, ?4, ?5, ?6, ?7);&quot;;
+    sqlite3_stmt *stmt = [self _dbPrepareStmt:sql];
+    if (!stmt) return NO;
+
+    int timestamp = (int)time(NULL);
+    sqlite3_bind_text(stmt, 1, key.UTF8String, -1, NULL);
+    sqlite3_bind_text(stmt, 2, fileName.UTF8String, -1, NULL);
+    sqlite3_bind_int(stmt, 3, (int)value.length);
+    if (fileName.length == 0) {
+    //如果文件名长度==0，则将value存入数据库
+        sqlite3_bind_blob(stmt, 4, value.bytes, (int)value.length, 0);
+    } else {
+    //如果文件名长度不为0，则不将value存入数据库
+        sqlite3_bind_blob(stmt, 4, NULL, 0, 0);
+    }
+    sqlite3_bind_int(stmt, 5, timestamp);
+    sqlite3_bind_int(stmt, 6, timestamp);
+    sqlite3_bind_blob(stmt, 7, extendedData.bytes, (int)extendedData.length, 0);
+
+    int result = sqlite3_step(stmt);
+    if (result != SQLITE_DONE) {
+        if (_errorLogsEnabled) NSLog(@&quot;%s line:%d sqlite insert error (%d): %s&quot;, __FUNCTION__, __LINE__, result, sqlite3_errmsg(_db));
+        return NO;
+    }
+    return YES;
+}
+</code></pre><p>框架作者用数据库的一条记录来保存关于某个缓存的所有信息。 而且数据库的第四个字段是保存缓存对应的data的，从上面的代码可以看出当filename为空和不为空的时候的处理的差别。</p>
+<p>接下里是获取缓存的操作：</p>
+<pre><code>- (YYKVStorageItem *)getItemForKey:(NSString *)key {
+    if (key.length == 0) return nil;
+    YYKVStorageItem *item = [self _dbGetItemWithKey:key excludeInlineData:NO];
+    if (item) {
+        [self _dbUpdateAccessTimeWithKey:key];
+        if (item.filename) {
+            item.value = [self _fileReadWithName:item.filename];
+            if (!item.value) {
+                [self _dbDeleteItemWithKey:key];
+                item = nil;
+            }
+        }
+    }
+    return item;
+}
+</code></pre><p>根据key获取item，然后更新访问时间，如果item的文件名不为空，获取item的value，如果value为空，删除item。</p>
+<h2 id="关于线程安全的方案"><a href="#关于线程安全的方案" class="headerlink" title="关于线程安全的方案"></a>关于线程安全的方案</h2><p>YYMemoryCache 使用了 pthread_mutex 线程锁（互斥锁）来确保线程安全<br>YYDiskCache 则选择了更适合它的 dispatch_semaphore。</p>
+<h3 id="pthread-mutex线程锁（互斥锁）："><a href="#pthread-mutex线程锁（互斥锁）：" class="headerlink" title="pthread_mutex线程锁（互斥锁）："></a>pthread_mutex线程锁（互斥锁）：</h3><p>在YYMemoryCache的初始化方法中得到了互斥锁，并在它的所有接口里都加入了互斥锁来保证线程安全，最后在dealloc方法销毁。</p>
+<pre><code>- (instancetype)init {
+    self = super.init;
+    //初始化锁
+    pthread_mutex_init(&amp;_lock, NULL);
+    _lru = [_YYLinkedMap new];
+    ...
+}
+
+- (NSUInteger)totalCount {
+    //上锁
+    pthread_mutex_lock(&amp;_lock);
+    NSUInteger count = _lru-&gt;_totalCount;
+    //解锁
+    pthread_mutex_unlock(&amp;_lock);
+    return count;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [_lru removeAll];
+    //销毁锁
+    pthread_mutex_destroy(&amp;_lock);
+}
+</code></pre><h3 id="dispatch-semaphore信号量代替锁"><a href="#dispatch-semaphore信号量代替锁" class="headerlink" title="dispatch_semaphore信号量代替锁"></a>dispatch_semaphore信号量代替锁</h3><blockquote>
+<p>dispatch_semaphore 是信号量，但当信号总量设为 1 时也可以当作锁来。在没有等待情况出现时，它的性能比 pthread_mutex 还要高，但一旦有等待情况出现时，性能就会下降许多。相对于 OSSpinLock 来说，它的优势在于等待时不会消耗 CPU 资源。对磁盘缓存来说，它比较合适。</p>
+</blockquote>
+<p>初始化的时候实例化了一个信号量：</p>
+<pre><code>- (instancetype)initWithPath:(NSString *)path
+             inlineThreshold:(NSUInteger)threshold {
+    ...
+    _lock = dispatch_semaphore_create(1);
+    _queue = dispatch_queue_create(&quot;com.ibireme.cache.disk&quot;, DISPATCH_QUEUE_CONCURRENT);
+    ...
+</code></pre><p>用宏来代替加锁解锁的代码</p>
+<pre><code>#define Lock() dispatch_semaphore_wait(self-&gt;_lock, DISPATCH_TIME_FOREVER)
+#define Unlock() dispatch_semaphore_signal(self-&gt;_lock)
+</code></pre><h2 id="涉及到的一些技巧"><a href="#涉及到的一些技巧" class="headerlink" title="涉及到的一些技巧"></a>涉及到的一些技巧</h2><h3 id="异步释放对象的技巧"><a href="#异步释放对象的技巧" class="headerlink" title="异步释放对象的技巧"></a>异步释放对象的技巧</h3><p>为了异步将某个对象释放掉，可以通过在GCD的block里面给它发个消息来实现。这个技巧在该框架中很常见，举一个删除一个内存缓存的例子：</p>
+<pre><code>- (void)_trimToCost:(NSUInteger)costLimit {
+    ...
+
+    NSMutableArray *holder = [NSMutableArray new];
+    while (!finish) {
+        if (pthread_mutex_trylock(&amp;_lock) == 0) {
+            if (_lru-&gt;_totalCost &gt; costLimit) {
+                _YYLinkedMapNode *node = [_lru removeTailNode];
+                if (node) [holder addObject:node];
+            } else {
+                finish = YES;
+            }
+            pthread_mutex_unlock(&amp;_lock);
+        } else {
+            usleep(10 * 1000); //10 ms
+        }
+    }
+    if (holder.count) {
+        dispatch_queue_t queue = _lru-&gt;_releaseOnMainThread ? dispatch_get_main_queue() : YYMemoryCacheGetReleaseQueue();
+        dispatch_async(queue, ^{
+            [holder count]; // release in queue
+        });
+    }
+}
+</code></pre><p>因为OC对象的释放也是会消耗性能的。作者把需要释放的对象放到子线程中是对性能的考虑。<br>通过数组holder持有所有待释放的node对象，然后在指定线程的block中持有，最后在queue中释放。</p>
+<blockquote>
+<p>holder 持有了待释放的对象，这些对象应该根据配置在不同线程进行释放(release)。此处 holder 被 block 持有，然后在另外的 queue 中释放。[holder count] 只是为了让 holder 被 block 捕获，保证编译器不会优化掉这个操作，所以随便调用了一个方法。</p>
+</blockquote>
+<h2 id="总结YYCache的技术点"><a href="#总结YYCache的技术点" class="headerlink" title="总结YYCache的技术点"></a>总结YYCache的技术点</h2><p>双向链表的概念以及相关操作<br>互斥锁，信号量的使用<br>实现线程安全的方案<br>缓存的策略</p>
+
         
     
 
