@@ -43,7 +43,7 @@
     
     <title>
         
-            自定义UIPanGestureRecognizer只能垂直或水平滑动 | 
+            《出一套iOS高级面试题》基础题 解答 | 
         
         iOS Coder
     </title>
@@ -53,7 +53,7 @@
     <link rel="icon" href="/img/iOS.png">
 
     <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" itemprop="description" content="如何自定义UIPanGestureRecognizer，让它只能响应垂直或水平滑动。">
+    <meta name="description" itemprop="description" content="">
     <meta name="keywords" content="">
     <meta name="theme-color" content="#0097A7">
 
@@ -220,7 +220,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="iOS Coder">
-    <meta name="msapplication-starturl" content="http://killua167.github.io/2016/12/29/自定义UIPanGestureRecognizer只能垂直或水平滑动/">
+    <meta name="msapplication-starturl" content="http://killua167.github.io/2018/07/25/《出一套iOS高级面试题》基础题-解答/">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="iOS Coder">
@@ -235,16 +235,16 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://killua167.github.io/2016/12/29/自定义UIPanGestureRecognizer只能垂直或水平滑动/">
+    <meta property="og:url" content="http://killua167.github.io/2018/07/25/《出一套iOS高级面试题》基础题-解答/">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="自定义UIPanGestureRecognizer只能垂直或水平滑动 | iOS Coder">
+    <meta property="og:title" content="《出一套iOS高级面试题》基础题 解答 | iOS Coder">
     <meta property="og:image" content="/img/iOS.png">
-    <meta property="og:description" content="如何自定义UIPanGestureRecognizer，让它只能响应垂直或水平滑动。">
+    <meta property="og:description" content="">
     
 
     
-        <meta property="article:published_time" content="Thu Dec 29 2016 16:09:24 GMT+0800">
-        <meta property="article:modified_time" content="Fri Jul 13 2018 16:45:56 GMT+0800">
+        <meta property="article:published_time" content="Wed Jul 25 2018 10:32:44 GMT+0800">
+        <meta property="article:modified_time" content="Wed Jul 25 2018 17:08:34 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -252,7 +252,7 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://killua167.github.io/2016/12/29/自定义UIPanGestureRecognizer只能垂直或水平滑动/index.html" />
+        <link rel="canonical" href="http://killua167.github.io/2018/07/25/《出一套iOS高级面试题》基础题-解答/index.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -264,10 +264,10 @@
 {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "mainEntityOfPage": "http://killua167.github.io/2016/12/29/自定义UIPanGestureRecognizer只能垂直或水平滑动/index.html",
-    "headline": "自定义UIPanGestureRecognizer只能垂直或水平滑动",
-    "datePublished": "Thu Dec 29 2016 16:09:24 GMT+0800",
-    "dateModified": "Fri Jul 13 2018 16:45:56 GMT+0800",
+    "mainEntityOfPage": "http://killua167.github.io/2018/07/25/《出一套iOS高级面试题》基础题-解答/index.html",
+    "headline": "《出一套iOS高级面试题》基础题 解答",
+    "datePublished": "Wed Jul 25 2018 10:32:44 GMT+0800",
+    "dateModified": "Wed Jul 25 2018 17:08:34 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "killua167",
@@ -286,7 +286,7 @@
         }
     },
     "keywords": "",
-    "description": "如何自定义UIPanGestureRecognizer，让它只能响应垂直或水平滑动。",
+    "description": "",
 }
 </script>
 
@@ -351,7 +351,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#场景"><span class="post-toc-text">场景</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#动手"><span class="post-toc-text">动手</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#根源"><span class="post-toc-text">根源</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#解决"><span class="post-toc-text">解决</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#最后附上代码："><span class="post-toc-text">最后附上代码：</span></a>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-分类和扩展有什么区别？可以分别用来做什么？分类有哪些局限性？分类的结构体里面有哪些成员？"><span class="post-toc-text">1.分类和扩展有什么区别？可以分别用来做什么？分类有哪些局限性？分类的结构体里面有哪些成员？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-讲一下atomic的实现机制；为什么不能保证绝对的线程安全（最好可以结合场景来说）？"><span class="post-toc-text">2.讲一下atomic的实现机制；为什么不能保证绝对的线程安全（最好可以结合场景来说）？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-被weak修饰的对象在被释放的时候会发生什么？是如何实现的？知道sideTable么？里面的结构可以画出来么？"><span class="post-toc-text">3.被weak修饰的对象在被释放的时候会发生什么？是如何实现的？知道sideTable么？里面的结构可以画出来么？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-关联对象有什么应用，系统如何管理关联对象？其被释放的时候需要手动将所有的关联对象的指针置空么？"><span class="post-toc-text">4.关联对象有什么应用，系统如何管理关联对象？其被释放的时候需要手动将所有的关联对象的指针置空么？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-KVO的底层实现？如何取消系统默认的KVO并手动触发（给KVO的触发设定条件：改变的值符合某个条件时再触发KVO）？"><span class="post-toc-text">5.KVO的底层实现？如何取消系统默认的KVO并手动触发（给KVO的触发设定条件：改变的值符合某个条件时再触发KVO）？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-Autoreleasepool所使用的数据结构是什么？AutoreleasePoolPage结构体了解么？"><span class="post-toc-text">6.Autoreleasepool所使用的数据结构是什么？AutoreleasePoolPage结构体了解么？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-讲一下对象，类对象，元类，跟元类结构体的组成以及他们是如何相关联的？为什么对象方法没有保存的对象结构体里，而是保存在类对象的结构体里？"><span class="post-toc-text">7.讲一下对象，类对象，元类，跟元类结构体的组成以及他们是如何相关联的？为什么对象方法没有保存的对象结构体里，而是保存在类对象的结构体里？</span></a></li></ol>
     </ul>
     
 
@@ -383,7 +383,7 @@
         
     
             <p class="article-headline-p">
-                自定义UIPanGestureRecognizer只能垂直或水平滑动
+                《出一套iOS高级面试题》基础题 解答
             </p>
         </div>
 
@@ -402,7 +402,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>killua167</strong>
-        <span>12月 29, 2016</span>
+        <span>7月 25, 2018</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -437,7 +437,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=自定义UIPanGestureRecognizer只能垂直或水平滑动&url=http://killua167.github.io/2016/12/29/自定义UIPanGestureRecognizer只能垂直或水平滑动/index.html&via=killua167" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=《出一套iOS高级面试题》基础题 解答&url=http://killua167.github.io/2018/07/25/《出一套iOS高级面试题》基础题-解答/index.html&via=killua167" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -446,7 +446,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://killua167.github.io/2016/12/29/自定义UIPanGestureRecognizer只能垂直或水平滑动/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://killua167.github.io/2018/07/25/《出一套iOS高级面试题》基础题-解答/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -474,80 +474,86 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>如何自定义UIPanGestureRecognizer，让它只能响应垂直或水平滑动。<br><a id="more"></a></p>
-<h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4><p>有点类似网易新闻首页，一个tableView上某些cell需要左右滑动手势进行操作，而tableView又作为scrollView的子视图可以左右滑动。这时，cell的手势就和scrollView的冲突了，导致cell只响应UIPanGestureRecognizer手势，而无法垂直滑动。这就需要屏蔽自定义手势的上下滑动，只保留左右滑动。</p>
-<h4 id="动手"><a href="#动手" class="headerlink" title="动手"></a>动手</h4><p>那就先从UIPanGestureRecognizer的代理方法入手，看有没办法解决这个手势冲突。百度上大部分都是这个方法来判断，然而我试验了一下，这个是直接取消其中一个的手势响应，和我需求不服，pass！</p>
-<pre><code>// called when the recognition of one of gestureRecognizer or otherGestureRecognizer would be blocked by the other
-// return YES to allow both to recognize simultaneously. the default implementation returns NO (by default no two gestures can be recognized simultaneously)
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer;
-</code></pre><p>再尝试其他方法</p>
-<pre><code>// called before touchesBegan:withEvent: is called on the gesture recognizer for a new touch. return NO to prevent the gesture recognizer from seeing this touch
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
-</code></pre><p>看了下API说明，这个方法会在Pan手势介入事件之前（即gestureRecognizerShouldBegin方法之前）发生，来判断是否让Pan手势响应。但是这里<br>gestureRecognizer的state都是UIGestureRecognizerStatePossible，即还没识别，所以不能预测到滑动的方向 ，显然无法解决。</p>
-<h4 id="根源"><a href="#根源" class="headerlink" title="根源"></a>根源</h4><p>问题的解决办法根源在​gestureRecognizerShouldBegin执行之前获知它的滑动方向，这样就能提前判断是不是让Pan接受响应，所以我们必须用更底层的方法。</p>
-<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><p>在stackOverFlow里发现了这个帖子：<br><a href="http://stackoverflow.com/questions/7100884/uipangesturerecognizer-only-vertical-or-horizontal​" target="_blank" rel="noopener">http://stackoverflow.com/questions/7100884/uipangesturerecognizer-only-vertical-or-horizontal​</a></p>
-<p>看到一个大神的回答，它的办法是 写一个继承UIPanGestureRecognizer的 PanGestureRecognizer，然后重写</p>
-<pre><code>- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-</code></pre><p>这个方法来判断方向，这个方法较底层，它会比gestureRecognizerShouldBegin更早的得到相应，在这个方法里去让Pan不响应就好了。</p>
-<h3 id="最后附上代码："><a href="#最后附上代码：" class="headerlink" title="最后附上代码："></a>最后附上代码：</h3><pre><code>#import &lt;Foundation/Foundation.h&gt;
-#import &lt;UIKit/UIGestureRecognizerSubclass.h&gt;
-
-typedef enum {
-    DirectionPangestureRecognizerVertical,
-    DirectionPanGestureRecognizerHorizontal
-} DirectionPangestureRecognizerDirection;
-
-@interface DirectionPanGestureRecognizer : UIPanGestureRecognizer {
-    BOOL _drag;
-    int _moveX;
-    int _moveY;
-    DirectionPangestureRecognizerDirection _direction;
+        <h3 id="1-分类和扩展有什么区别？可以分别用来做什么？分类有哪些局限性？分类的结构体里面有哪些成员？"><a href="#1-分类和扩展有什么区别？可以分别用来做什么？分类有哪些局限性？分类的结构体里面有哪些成员？" class="headerlink" title="1.分类和扩展有什么区别？可以分别用来做什么？分类有哪些局限性？分类的结构体里面有哪些成员？"></a>1.分类和扩展有什么区别？可以分别用来做什么？分类有哪些局限性？分类的结构体里面有哪些成员？</h3><p>类扩展(extension)能为某个类附加额外的私有的属性，成员变量，方法声明，一般写在.m文件中。<br>分类(category)作为是在不修改原来类的基础上，为一个类扩展方法。通常为系统类的添加额外的方法。<br>分类局限性：</p>
+<ol>
+<li>不能扩展属性和成员变量，如果添加属性，则只会生成setter和getter的声明,不会生成实现和成员变量；</li>
+<li>分类中的方法和原有类中方法同名，会覆盖原来的方法。</li>
+<li>如果多个category中存在同名的方法，运行时到底调用哪个方法由编译器决定，最后一个参与编译的方法会被调用。</li>
+</ol>
+<p>分类的结构体：</p>
+<pre><code>typedef struct category_t {
+    const char *name;  //类的名字
+    classref_t cls;  //类
+    struct method_list_t *instanceMethods;  //category中所有给类添加的实例方法的列表
+    struct method_list_t *classMethods;  //category中所有添加的类方法的列表
+    struct protocol_list_t *protocols;  //category实现的所有协议的列表
+    struct property_list_t *instanceProperties;  //category中添加的所有属性
+} category_t;
+</code></pre><h3 id="2-讲一下atomic的实现机制；为什么不能保证绝对的线程安全（最好可以结合场景来说）？"><a href="#2-讲一下atomic的实现机制；为什么不能保证绝对的线程安全（最好可以结合场景来说）？" class="headerlink" title="2.讲一下atomic的实现机制；为什么不能保证绝对的线程安全（最好可以结合场景来说）？"></a>2.讲一下atomic的实现机制；为什么不能保证绝对的线程安全（最好可以结合场景来说）？</h3><p>系统自动生成的getter/setter方法会进行加锁操作。<br>atomic的加锁只保证getter和setter存取方法的线程安全，不能保证线程之外的其他操作。(比如:如果当一个线程正在get或set时,又有另一个线程同时在进行release操作,可能会直接crash)</p>
+<h3 id="3-被weak修饰的对象在被释放的时候会发生什么？是如何实现的？知道sideTable么？里面的结构可以画出来么？"><a href="#3-被weak修饰的对象在被释放的时候会发生什么？是如何实现的？知道sideTable么？里面的结构可以画出来么？" class="headerlink" title="3.被weak修饰的对象在被释放的时候会发生什么？是如何实现的？知道sideTable么？里面的结构可以画出来么？"></a>3.被weak修饰的对象在被释放的时候会发生什么？是如何实现的？知道sideTable么？里面的结构可以画出来么？</h3><p>释放时，调用clearDeallocating函数。clearDeallocating函数首先根据对象地址获取所有weak指针地址的数组，然后遍历这个数组把其中的数据设为nil，最后把这个entry从weak表中删除，最后清理对象的记录。<br>sideTable结构</p>
+<pre><code>struct SideTable {
+// 保证原子操作的自旋锁
+    spinlock_t slock;
+    // 引用计数的 hash 表
+    RefcountMap refcnts;
+    // weak 引用全局 hash 表
+    weak_table_t weak_table;
 }
-
-@property (nonatomic, assign) DirectionPangestureRecognizerDirection direction;
-
-@end
-</code></pre><pre><code>#import &quot;DirectionPanGestureRecognizer.h&quot;
-
-int const static kDirectionPanThreshold = 5;
-
-@implementation DirectionPanGestureRecognizer
-
-@synthesize direction = _direction;
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesMoved:touches withEvent:event];
-    if (self.state == UIGestureRecognizerStateFailed) return;
-    CGPoint nowPoint = [[touches anyObject] locationInView:self.view];
-    CGPoint prevPoint = [[touches anyObject] previousLocationInView:self.view];
-    _moveX += prevPoint.x - nowPoint.x;
-    _moveY += prevPoint.y - nowPoint.y;
-    if (!_drag) {
-        if (abs(_moveX) &gt; kDirectionPanThreshold) {
-            if (_direction == DirectionPangestureRecognizerVertical) {
-                self.state = UIGestureRecognizerStateFailed;
-            }else {
-                _drag = YES;
-            }
-        }else if (abs(_moveY) &gt; kDirectionPanThreshold) {
-            if (_direction == DirectionPanGestureRecognizerHorizontal) {
-                self.state = UIGestureRecognizerStateFailed;
-            }else {
-                _drag = YES;
-            }
-        }
-    }
+</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/1204112-3b57375cebb02aee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt=""></p>
+<h3 id="4-关联对象有什么应用，系统如何管理关联对象？其被释放的时候需要手动将所有的关联对象的指针置空么？"><a href="#4-关联对象有什么应用，系统如何管理关联对象？其被释放的时候需要手动将所有的关联对象的指针置空么？" class="headerlink" title="4.关联对象有什么应用，系统如何管理关联对象？其被释放的时候需要手动将所有的关联对象的指针置空么？"></a>4.关联对象有什么应用，系统如何管理关联对象？其被释放的时候需要手动将所有的关联对象的指针置空么？</h3><p>关联对象的应用：</p>
+<ol>
+<li>添加公共属性。当需要在分类中添加属性，可以用到runtime关联对象；</li>
+<li>添加私有成员变量。如为UI控件关联事件Block体</li>
+<li>关联观察者对象。有时候我们在分类中使用NSNotificationCenter或者KVO，推荐使用关联的对象作为观察者，尽量避免对象观察自身</li>
+</ol>
+<p>当对象被释放时，会根据这个策略来决定是否释放关联的对象，当策略是RETAIN/COPY时，会释放（release）关联的对象，当是ASSIGN，将不会释放。<br>值得注意的是，我们不需要主动调用removeAssociated来接触关联的对象，如果需要解除指定的对象，可以使用setAssociatedObject置nil来实现。</p>
+<h3 id="5-KVO的底层实现？如何取消系统默认的KVO并手动触发（给KVO的触发设定条件：改变的值符合某个条件时再触发KVO）？"><a href="#5-KVO的底层实现？如何取消系统默认的KVO并手动触发（给KVO的触发设定条件：改变的值符合某个条件时再触发KVO）？" class="headerlink" title="5.KVO的底层实现？如何取消系统默认的KVO并手动触发（给KVO的触发设定条件：改变的值符合某个条件时再触发KVO）？"></a>5.KVO的底层实现？如何取消系统默认的KVO并手动触发（给KVO的触发设定条件：改变的值符合某个条件时再触发KVO）？</h3><p>系统KVO的实现：<br>当你观察一个对象时，一个新的类会动态被创建。这个类继承自该对象的原本的类，并重写了被观察属性的 setter 方法。自然，重写的 setter 方法会负责在调用原 setter 方法之前和之后，通知所有观察对象值的更改。最后把这个对象的 isa 指针 ( isa 指针告诉 Runtime 系统这个对象的类是什么 ) 指向这个新创建的子类，对象就神奇的变成了新创建的子类的实例。</p>
+<h3 id="6-Autoreleasepool所使用的数据结构是什么？AutoreleasePoolPage结构体了解么？"><a href="#6-Autoreleasepool所使用的数据结构是什么？AutoreleasePoolPage结构体了解么？" class="headerlink" title="6.Autoreleasepool所使用的数据结构是什么？AutoreleasePoolPage结构体了解么？"></a>6.Autoreleasepool所使用的数据结构是什么？AutoreleasePoolPage结构体了解么？</h3><p>双向链表。<br><img src="https://upload-images.jianshu.io/upload_images/1975281-0b868956aa0cf87c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt=""><br>AutoreleasePoolPage结构体：</p>
+<pre><code>class AutoreleasePoolPage 
+{
+    static size_t const SIZE = PAGE_MAX_SIZE;
+    magic_t const magic;                   // 16字节
+    id *next;                              // 8字节
+    pthread_t const thread;                // 8字节
+    AutoreleasePoolPage * const parent;    // 8字节 
+    AutoreleasePoolPage *child;            // 8字节
+    uint32_t const depth;                  // 4字节
+    uint32_t hiwat;                        // 4字节
+    ...
 }
+#define PAGE_MAX_SIZE           PAGE_SIZE
+#define PAGE_SIZE              I386_PGBYTES
+#define I386_PGBYTES            4096
+</code></pre><h3 id="7-讲一下对象，类对象，元类，跟元类结构体的组成以及他们是如何相关联的？为什么对象方法没有保存的对象结构体里，而是保存在类对象的结构体里？"><a href="#7-讲一下对象，类对象，元类，跟元类结构体的组成以及他们是如何相关联的？为什么对象方法没有保存的对象结构体里，而是保存在类对象的结构体里？" class="headerlink" title="7.讲一下对象，类对象，元类，跟元类结构体的组成以及他们是如何相关联的？为什么对象方法没有保存的对象结构体里，而是保存在类对象的结构体里？"></a>7.讲一下对象，类对象，元类，跟元类结构体的组成以及他们是如何相关联的？为什么对象方法没有保存的对象结构体里，而是保存在类对象的结构体里？</h3><p>对象结构体：</p>
+<pre><code>/// An opaque type that represents an Objective-C class.
+typedef struct objc_class *Class;
 
-- (void)reset {
-    [super reset];
-    _drag = NO;
-    _moveX = 0;
-    _moveY = 0;
+/// Represents an instance of a class.
+struct objc_object {
+    Class _Nonnull isa  OBJC_ISA_AVAILABILITY;
+};
+
+/// A pointer to an instance of a class.
+typedef struct objc_object *id;
+</code></pre><p>这里的isa 指针,指向的是当前实例的类对象<br>类对象结构体：</p>
+<pre><code>struct objc_class {
+    Class _Nonnull isa  OBJC_ISA_AVAILABILITY;
+
+#if !__OBJC2__
+    Class _Nullable super_class                              OBJC2_UNAVAILABLE; // 父类
+    const char * _Nonnull name                               OBJC2_UNAVAILABLE; //类名
+    long version                                             OBJC2_UNAVAILABLE;
+    long info                                                OBJC2_UNAVAILABLE;
+    long instance_size                                       OBJC2_UNAVAILABLE; //实例大小
+    struct objc_ivar_list * _Nullable ivars                  OBJC2_UNAVAILABLE;  //成员变量列表
+    struct objc_method_list * _Nullable * _Nullable methodLists                    OBJC2_UNAVAILABLE; //方法列表
+    struct objc_cache * _Nonnull cache                       OBJC2_UNAVAILABLE; //方法缓存
+    struct objc_protocol_list * _Nullable protocols          OBJC2_UNAVAILABLE; //协议列表
+#endif
+
 }
+</code></pre><p>这里的isa 指针,指向的就是元类<br>所有的对象调用方法都是一样的，没有必要存在对象中，对象可以有无数个，类对象就有一个所以只需存放在类对象中就可以了。</p>
 
-@end
-</code></pre>
         
     
 
@@ -567,19 +573,19 @@ int const static kDirectionPanThreshold = 5;
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/05/22/ReactiveSwift-MVVM-登录demo详解/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
+    
+        <a href="/2018/07/24/《出一套iOS高级面试题》实战题 解答/" id="post_nav-older" class="next-content">
+            舊篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
     
 </nav>
 
